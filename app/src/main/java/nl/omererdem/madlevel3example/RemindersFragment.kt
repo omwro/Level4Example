@@ -56,9 +56,8 @@ class RemindersFragment : Fragment() {
     private fun observeAddReminderResult() {
         setFragmentResultListener(REQ_REMINDER_KEY) { key, bundle ->
             bundle.getString(BUNDLE_REMINDER_KEY)?.let {
-                val reminder = Reminder(it)
-                reminders.add(reminder)
-                reminderAdapter.notifyDataSetChanged()
+                reminderRepository.insertReminder(Reminder(it))
+                getRemindersFromDatabase()
             } ?: Log.e("ReminderFragment", "Request triggered, but empty reminder text!")
         }
     }
