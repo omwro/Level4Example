@@ -20,6 +20,8 @@ class RemindersFragment : Fragment() {
     private val reminders = arrayListOf<Reminder>()
     private val reminderAdapter = ReminderAdapter(reminders)
 
+    private lateinit var reminderRepository: ReminderRepository
+
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -33,6 +35,14 @@ class RemindersFragment : Fragment() {
 
         initViews()
         observeAddReminderResult()
+
+        reminderRepository = ReminderRepository(requireContext())
+        getRemindersFromDatabase()
+    }
+
+    private fun getRemindersFromDatabase() {
+        this@RemindersFragment.reminders.clear()
+        this@RemindersFragment.reminders.addAll(reminderRepository.getAllReminders())
     }
 
     private fun initViews() {
