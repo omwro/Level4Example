@@ -74,7 +74,7 @@ class RemindersFragment : Fragment() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-                
+
                 val reminderToDelete = reminders[position]
                 reminderRepository.deleteReminder(reminderToDelete)
                 getRemindersFromDatabase()
